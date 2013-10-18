@@ -10,6 +10,24 @@ window.SocialShareButton =
     url = encodeURIComponent($(el).parent().data("url") || '')
     if url.length == 0
       url = encodeURIComponent(location.href)
+      
+    if gon.gaqOn && gon.signedIn
+      if url.indexOf("channel") != -1
+        if gon.hashCode == gon.broadcast_session
+          ga('send', 'event', '主播分享', "直播頻道-#{site}", gon.hashCode);
+        else
+          ga('send', 'event', '聽眾分享', "直播頻道-#{site}", gon.hashCode);
+      else if url.indexOf("records") != -1
+        if gon.hashCode == gon.broadcast_session
+          ga('send', 'event', '主播分享', "直播紀錄-#{site}", gon.hashCode);
+        else
+          ga('send', 'event', '聽眾分享', "直播紀錄-#{site}", gon.hashCode);
+    else if gon.gaqOn
+      if url.indexOf("channel") != -1
+        ga('send', 'event', '聽眾分享', "直播頻道-#{site}", 'NA');
+      else if url.indexOf("records") != -1
+        ga('send', 'event', '聽眾分享', "直播記錄-#{site}", 'NA');  
+      
     switch site
       when "weibo"
         SocialShareButton.openUrl("http://service.weibo.com/share/share.php?url=#{url}&type=3&pic=#{img}&title=#{title}")
