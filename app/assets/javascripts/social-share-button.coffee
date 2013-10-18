@@ -11,7 +11,7 @@ window.SocialShareButton =
     if url.length == 0
       url = encodeURIComponent(location.href)
       
-    if gon.gaqOn && gon.signedIn
+    if gon.signedIn
       if url.indexOf("channel") != -1
         if gon.hashCode == gon.broadcast_session
           console.log "直播頻道-#{site} 主播分享 #{gon.hashCode}" 
