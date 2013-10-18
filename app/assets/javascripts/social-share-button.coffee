@@ -14,18 +14,24 @@ window.SocialShareButton =
     if gon.gaqOn && gon.signedIn
       if url.indexOf("channel") != -1
         if gon.hashCode == gon.broadcast_session
+          console.log "直播頻道-#{site} 主播分享 #{gon.hashCode}" 
           ga('send', 'event', '主播分享', "直播頻道-#{site}", gon.hashCode);
         else
+          console.log "直播頻道-#{site} 聽眾分享 #{gon.hashCode}" 
           ga('send', 'event', '聽眾分享', "直播頻道-#{site}", gon.hashCode);
       else if url.indexOf("records") != -1
         if gon.hashCode == gon.broadcast_session
+          console.log "直播紀錄-#{site} 主播分享 #{gon.hashCode}"
           ga('send', 'event', '主播分享', "直播紀錄-#{site}", gon.hashCode);
         else
+          console.log "直播紀錄-#{site} 聽眾分享 #{gon.hashCode}"
           ga('send', 'event', '聽眾分享', "直播紀錄-#{site}", gon.hashCode);
     else if gon.gaqOn
       if url.indexOf("channel") != -1
+        console.log "直播頻道-#{site} 聽眾分享 NA"
         ga('send', 'event', '聽眾分享', "直播頻道-#{site}", 'NA');
       else if url.indexOf("records") != -1
+        console.log "直播記錄-#{site} 聽眾分享 NA"
         ga('send', 'event', '聽眾分享', "直播記錄-#{site}", 'NA');  
       
     switch site
